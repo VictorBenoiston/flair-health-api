@@ -1,0 +1,45 @@
+{
+  "name": "flair-health-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Victor Oliveira",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "ts-node-dev ./src/index.ts",
+    "production": "node ./build/index.js",
+    "postinstall": "tsc",
+    "test": "jest",
+    "knex:migrate": "knex --knexfile ./src/server/database/knex/Environment.ts migrate:latest",
+    "knex:rollback": "knex --knexfile ./src/server/database/knex/Environment.ts migrate:rollback",
+    "knex:rollback-all": "knex --knexfile ./src/server/database/knex/Environment.ts migrate:rollback --all",
+    "knex:seed": "knex --knexfile ./src/server/database/knex/Environment.ts seed:run",
+    "knex:currentVersion": "knex --knexfile ./src/server/database/knex/Environment.ts migrate:currentVersion",
+    "knex:fix-update": "yarn knex:rollback-all && yarn knex:migrate && yarn knex:seed && yarn knex:currentVersion && yarn start"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.699.0",
+    "@aws-sdk/signature-v4-crt": "^3.696.0",
+    "aws-sdk": "^2.1692.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "uuidv4": "^6.2.13",
+    "yup": "^1.4.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/yup": "^0.32.0",
+    "eslint": "^9.15.0",
+    "globals": "^15.12.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.15.0"
+  }
+}
